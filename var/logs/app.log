@@ -1,0 +1,37 @@
+
+{
+  File: 
+   C:/Users/vadim/LinkUp/user_service/main.go
+  Line: 
+   13
+  Error:
+   listen tcp 127.0.0.1:7070: bind: An attempt was made to access a socket in a way forbidden by its access permissions.
+  Code:
+   Internal Server Error
+  HTTP:
+   Internal Server Error
+}
+{
+  File: 
+   C:/Users/vadim/LinkUp/user_service/api/base/db/db.go
+  Line: 
+   39
+  Error:
+   ERROR PING dial tcp [::1]:5432: connectex: No connection could be made because the target machine actively refused it.
+  Code:
+   Error Connect Database
+  HTTP:
+   Internal Server Error
+}
+{
+  File: 
+   C:/Users/vadim/LinkUp/user_service/api/base/db/db.go
+  Line: 
+   39
+  Error:
+   ERROR PING dial tcp [::1]:5432: connectex: No connection could be made because the target machine actively refused it.
+  Code:
+   Error Connect Database
+  HTTP:
+   Internal Server Error
+}
