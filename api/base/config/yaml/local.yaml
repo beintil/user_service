@@ -1,0 +1,14 @@
+db:
+  host: localhost
+  port: 5432
+  name: LinkUp
+  user: beintil
+  password: 0000
+
+server:
+  host: localhost
+  port: 8060
+
+auth:
+  port: 8070
+  host: http://localhost
