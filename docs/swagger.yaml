@@ -1,0 +1,382 @@
+basePath: /user_service/
+definitions:
+  client.Person:
+    properties:
+      age:
+        description: Age
+        type: integer
+      birthday:
+        description: Birth date
+        type: string
+      createdAt:
+        description: CreatedAt
+        type: string
+      firstName:
+        description: First name
+        type: string
+      gender:
+        description: Gender
+        enum:
+        - M
+        - F
+        type: string
+      id:
+        description: Identification of the person
+        type: integer
+      lastName:
+        description: Last name
+        type: string
+      middleName:
+        description: Middle name
+        type: string
+      phone:
+        description: Phone number
+        type: string
+      updated:
+        description: UpdatedAt
+        type: string
+      userId:
+        description: Identification of the user
+        type: integer
+    required:
+    - firstName
+    - lastName
+    type: object
+  client.User:
+    properties:
+      createdAt:
+        description: CreatedAt
+        type: string
+      email:
+        description: Email
+        type: string
+      id:
+        description: Id user identification
+        type: integer
+      newPassword:
+        description: NewPassword New password
+        maxLength: 20
+        minLength: 5
+        type: string
+      password:
+        description: Password
+        maxLength: 20
+        minLength: 5
+        type: string
+      person:
+        allOf:
+        - $ref: '#/definitions/client.Person'
+        description: Person stores info about the user
+      updated:
+        description: UpdatedAt
+        type: string
+    required:
+    - email
+    type: object
+  core.User:
+    properties:
+      createdAt:
+        description: CreatedAt
+        type: string
+      email:
+        description: Email
+        type: string
+      id:
+        description: Id user identification
+        type: integer
+      newPassword:
+        description: NewPassword New password
+        maxLength: 20
+        minLength: 5
+        type: string
+      password:
+        description: Password
+        maxLength: 20
+        minLength: 5
+        type: string
+      person:
+        allOf:
+        - $ref: '#/definitions/client.Person'
+        description: Person stores info about the user
+      updated:
+        description: UpdatedAt
+        type: string
+    required:
+    - email
+    type: object
+  v1.ErrorResponseCreateUser:
+    properties:
+      code:
+        description: Error response code
+        type: string
+      message:
+        description: Error response message
+        type: string
+    type: object
+  v1.ErrorResponseLoadUser:
+    properties:
+      code:
+        description: Error response code
+        type: string
+      message:
+        description: Error response message
+        type: string
+    type: object
+  v1.ErrorResponseSearchUser:
+    properties:
+      code:
+        description: Error response code
+        type: string
+      message:
+        description: Error response message
+        type: string
+    type: object
+  v1.ErrorResponseVerify:
+    properties:
+      code:
+        description: Error response code
+        type: string
+      message:
+        description: Error response message
+        type: string
+    type: object
+  v1.RequestCreateUser:
+    properties:
+      createdAt:
+        description: CreatedAt
+        type: string
+      email:
+        description: Email
+        type: string
+      id:
+        description: Id user identification
+        type: integer
+      newPassword:
+        description: NewPassword New password
+        maxLength: 20
+        minLength: 5
+        type: string
+      password:
+        description: Password
+        maxLength: 20
+        minLength: 5
+        type: string
+      person:
+        allOf:
+        - $ref: '#/definitions/client.Person'
+        description: Person stores info about the user
+      updated:
+        description: UpdatedAt
+        type: string
+    required:
+    - email
+    type: object
+  v1.RequestLoadUser:
+    properties:
+      id:
+        description: Identification of the user
+        type: integer
+    type: object
+  v1.RequestSearchUser:
+    properties:
+      firstNames:
+        description: First name of the user
+        items:
+          type: string
+        type: array
+      ids:
+        description: Identification of the users
+        items:
+          type: integer
+        type: array
+      lastNames:
+        description: Name of the user
+        items:
+          type: string
+        type: array
+      middleNames:
+        description: Middle name of the user
+        items:
+          type: string
+        type: array
+    type: object
+  v1.RequestVerify:
+    properties:
+      email:
+        description: Email Address of the user
+        type: string
+      password:
+        description: Password of the user
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  v1.SuccessfullyResponseCreateUser:
+    properties:
+      message:
+        description: User Message
+        type: string
+      user:
+        allOf:
+        - $ref: '#/definitions/core.User'
+        description: User entity result
+    type: object
+  v1.SuccessfullyResponseLoadUser:
+    properties:
+      message:
+        description: User Message
+        type: string
+      user:
+        allOf:
+        - $ref: '#/definitions/core.User'
+        description: User entity result
+    type: object
+  v1.SuccessfullyResponseSearchUser:
+    properties:
+      message:
+        description: User Message
+        type: string
+      user:
+        description: User entity result
+        items:
+          $ref: '#/definitions/client.User'
+        type: array
+    type: object
+  v1.SuccessfullyResponseVerify:
+    properties:
+      message:
+        description: User Message
+        type: string
+      user:
+        allOf:
+        - $ref: '#/definitions/core.User'
+        description: User entity result
+    type: object
+host: localhost:7081
+info:
+  contact: {}
+  title: Your API Title User service for the LinkUp application
+  version: "1.0"
+paths:
+  /api/v1/user:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user based on JSON input
+      parameters:
+      - description: User object to be created
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/v1.RequestCreateUser'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: User created successfully
+          schema:
+            $ref: '#/definitions/v1.SuccessfullyResponseCreateUser'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/v1.ErrorResponseCreateUser'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/v1.ErrorResponseCreateUser'
+      summary: Create a new user
+      tags:
+      - User
+  /api/v1/user/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Load the user based on JSON input
+      parameters:
+      - description: User object to be loaded
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/v1.RequestLoadUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User load successfully
+          schema:
+            $ref: '#/definitions/v1.SuccessfullyResponseLoadUser'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/v1.ErrorResponseLoadUser'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/v1.ErrorResponseLoadUser'
+      summary: Load the user
+      tags:
+      - User
+  /api/v1/user/list:
+    post:
+      consumes:
+      - application/json
+      description: Verification of authorization data
+      parameters:
+      - description: User object to be searched
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/v1.RequestSearchUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User search successfully
+          schema:
+            $ref: '#/definitions/v1.SuccessfullyResponseSearchUser'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/v1.ErrorResponseSearchUser'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/v1.ErrorResponseSearchUser'
+      summary: Search a users
+      tags:
+      - User
+  /api/v1/user/verify:
+    post:
+      consumes:
+      - application/json
+      description: Check auth data the user based on JSON input
+      parameters:
+      - description: User object to be checked
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/v1.RequestVerify'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User load successfully
+          schema:
+            $ref: '#/definitions/v1.SuccessfullyResponseVerify'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/v1.ErrorResponseVerify'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/v1.ErrorResponseVerify'
+      summary: Check auth data the user
+      tags:
+      - User
+swagger: "2.0"

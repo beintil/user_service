@@ -1,0 +1,565 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Your API Title User service for the LinkUp application",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:7081",
+    "basePath": "/user_service/",
+    "paths": {
+        "/api/v1/user": {
+            "post": {
+                "description": "Create a new user based on JSON input",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create a new user",
+                "parameters": [
+                    {
+                        "description": "User object to be created",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/v1.RequestCreateUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User created successfully",
+                        "schema": {
+                            "$ref": "#/definitions/v1.SuccessfullyResponseCreateUser"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/v1.ErrorResponseCreateUser"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/v1.ErrorResponseCreateUser"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/list": {
+            "post": {
+                "description": "Verification of authorization data",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Search a users",
+                "parameters": [
+                    {
+                        "description": "User object to be searched",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/v1.RequestSearchUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User search successfully",
+                        "schema": {
+                            "$ref": "#/definitions/v1.SuccessfullyResponseSearchUser"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/v1.ErrorResponseSearchUser"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/v1.ErrorResponseSearchUser"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/verify": {
+            "post": {
+                "description": "Check auth data the user based on JSON input",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Check auth data the user",
+                "parameters": [
+                    {
+                        "description": "User object to be checked",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/v1.RequestVerify"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User load successfully",
+                        "schema": {
+                            "$ref": "#/definitions/v1.SuccessfullyResponseVerify"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/v1.ErrorResponseVerify"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/v1.ErrorResponseVerify"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/{id}": {
+            "get": {
+                "description": "Load the user based on JSON input",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Load the user",
+                "parameters": [
+                    {
+                        "description": "User object to be loaded",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/v1.RequestLoadUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User load successfully",
+                        "schema": {
+                            "$ref": "#/definitions/v1.SuccessfullyResponseLoadUser"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/v1.ErrorResponseLoadUser"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/v1.ErrorResponseLoadUser"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "client.Person": {
+            "type": "object",
+            "required": [
+                "firstName",
+                "lastName"
+            ],
+            "properties": {
+                "age": {
+                    "description": "Age",
+                    "type": "integer"
+                },
+                "birthday": {
+                    "description": "Birth date",
+                    "type": "string"
+                },
+                "createdAt": {
+                    "description": "CreatedAt",
+                    "type": "string"
+                },
+                "firstName": {
+                    "description": "First name",
+                    "type": "string"
+                },
+                "gender": {
+                    "description": "Gender",
+                    "type": "string",
+                    "enum": [
+                        "M",
+                        "F"
+                    ]
+                },
+                "id": {
+                    "description": "Identification of the person",
+                    "type": "integer"
+                },
+                "lastName": {
+                    "description": "Last name",
+                    "type": "string"
+                },
+                "middleName": {
+                    "description": "Middle name",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "Phone number",
+                    "type": "string"
+                },
+                "updated": {
+                    "description": "UpdatedAt",
+                    "type": "string"
+                },
+                "userId": {
+                    "description": "Identification of the user",
+                    "type": "integer"
+                }
+            }
+        },
+        "client.User": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "createdAt": {
+                    "description": "CreatedAt",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "Email",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Id user identification",
+                    "type": "integer"
+                },
+                "newPassword": {
+                    "description": "NewPassword New password",
+                    "type": "string",
+                    "maxLength": 20,
+                    "minLength": 5
+                },
+                "password": {
+                    "description": "Password",
+                    "type": "string",
+                    "maxLength": 20,
+                    "minLength": 5
+                },
+                "person": {
+                    "description": "Person stores info about the user",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/client.Person"
+                        }
+                    ]
+                },
+                "updated": {
+                    "description": "UpdatedAt",
+                    "type": "string"
+                }
+            }
+        },
+        "core.User": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "createdAt": {
+                    "description": "CreatedAt",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "Email",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Id user identification",
+                    "type": "integer"
+                },
+                "newPassword": {
+                    "description": "NewPassword New password",
+                    "type": "string",
+                    "maxLength": 20,
+                    "minLength": 5
+                },
+                "password": {
+                    "description": "Password",
+                    "type": "string",
+                    "maxLength": 20,
+                    "minLength": 5
+                },
+                "person": {
+                    "description": "Person stores info about the user",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/client.Person"
+                        }
+                    ]
+                },
+                "updated": {
+                    "description": "UpdatedAt",
+                    "type": "string"
+                }
+            }
+        },
+        "v1.ErrorResponseCreateUser": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Error response code",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "Error response message",
+                    "type": "string"
+                }
+            }
+        },
+        "v1.ErrorResponseLoadUser": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Error response code",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "Error response message",
+                    "type": "string"
+                }
+            }
+        },
+        "v1.ErrorResponseSearchUser": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Error response code",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "Error response message",
+                    "type": "string"
+                }
+            }
+        },
+        "v1.ErrorResponseVerify": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Error response code",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "Error response message",
+                    "type": "string"
+                }
+            }
+        },
+        "v1.RequestCreateUser": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "createdAt": {
+                    "description": "CreatedAt",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "Email",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Id user identification",
+                    "type": "integer"
+                },
+                "newPassword": {
+                    "description": "NewPassword New password",
+                    "type": "string",
+                    "maxLength": 20,
+                    "minLength": 5
+                },
+                "password": {
+                    "description": "Password",
+                    "type": "string",
+                    "maxLength": 20,
+                    "minLength": 5
+                },
+                "person": {
+                    "description": "Person stores info about the user",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/client.Person"
+                        }
+                    ]
+                },
+                "updated": {
+                    "description": "UpdatedAt",
+                    "type": "string"
+                }
+            }
+        },
+        "v1.RequestLoadUser": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "Identification of the user",
+                    "type": "integer"
+                }
+            }
+        },
+        "v1.RequestSearchUser": {
+            "type": "object",
+            "properties": {
+                "firstNames": {
+                    "description": "First name of the user",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ids": {
+                    "description": "Identification of the users",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "lastNames": {
+                    "description": "Name of the user",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "middleNames": {
+                    "description": "Middle name of the user",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "v1.RequestVerify": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "description": "Email Address of the user",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "Password of the user",
+                    "type": "string"
+                }
+            }
+        },
+        "v1.SuccessfullyResponseCreateUser": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "description": "User Message",
+                    "type": "string"
+                },
+                "user": {
+                    "description": "User entity result",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/core.User"
+                        }
+                    ]
+                }
+            }
+        },
+        "v1.SuccessfullyResponseLoadUser": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "description": "User Message",
+                    "type": "string"
+                },
+                "user": {
+                    "description": "User entity result",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/core.User"
+                        }
+                    ]
+                }
+            }
+        },
+        "v1.SuccessfullyResponseSearchUser": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "description": "User Message",
+                    "type": "string"
+                },
+                "user": {
+                    "description": "User entity result",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/client.User"
+                    }
+                }
+            }
+        },
+        "v1.SuccessfullyResponseVerify": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "description": "User Message",
+                    "type": "string"
+                },
+                "user": {
+                    "description": "User entity result",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/core.User"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
